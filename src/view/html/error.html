@@ -1,0 +1,31 @@
+<!-- Copyright 2023 Initia -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title> Vue d'erreur </title>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/error.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/all.css">
+</head>
+<body class="bod-center">
+<div class="block">
+    <div class="card">
+        <p class="text-error">
+        <h4> {{ errorType|default('Erreur inconnue') }}</h4><br>
+        </p>
+    </div>
+</div>
+<div class="block">
+    <div class="card">
+        <p class="text-error">
+        <h4>{{ errorDetails|default('Aucun détails fournis') }}</h4><br>
+        </p>
+    </div>
+</div>
+<div class="block">
+    <div class="card">
+        <button type="button" id="disconnect-button" onclick="window.location.href='{{ base_path }}'">Retour</button>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+@font-face {
+    font-family: Manuscrite;
+    src: url("../fonts/Super Magnum.otf");
+}
+
+#notepadInput {
+    width: 20vw;
+    height: 50vh;
+    text-align: left;
+    vertical-align: top;
+    padding: 2vw;
+    background-image: linear-gradient(to bottom, rgb(242, 231, 191), rgba(181, 170, 138, 0.71), rgb(242, 231, 191));
+    font-family: Manuscrite, serif;
+    font-size: 1.5vw;
+    border-width: 2vw;
+    border-color: rgb(98, 74, 46);
+}

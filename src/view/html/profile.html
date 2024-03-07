@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/styleHome.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/all.css"/>
+    <title>Mon profil</title>
+</head>
+<body class="bod-center">
+<div>
+    <img alt="Logo SQLuedo" src="{{ base_path }}/view/Images/logo_SQLuedo.png" height="200" width="325">
+</div>
+
+
+<div class="block">
+    <div class="card">
+        <img alt="Icone utilisateur" src="{{ base_path }}/view/Images/icone-utilisateur.svg" height="150" width="150">
+    </div>
+</div>
+<p></p>
+<div class="block">
+    <div class="card">
+        <form method="post" action="{{ base_path }}/user/update" class="formulaire-card">
+            <input type="text" id="username" name="username" value="{{ username }}">
+            <label for="username"></label>
+            <input type="email" id="email" name="email" value="{{ email }}">
+            <label for="email"></label>
+            <input type="submit" name="submit" value="Enregistrer" class="submit-button">
+        </form>
+    </div>
+</div>
+<p></p>
+<div class="block">
+    <div class="card">
+        <button type="button" id="disconnect-button" onclick="window.location.href='{{ base_path }}/user/menu'">Retour
+        </button>
+    </div>
+</div>
+</body>
+</html>

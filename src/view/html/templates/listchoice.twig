@@ -1,0 +1,24 @@
+{# listchoice.twig #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/all.css">
+        <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/styleInquiryChoice.css">
+        <title>Choix {% block pageTitle %}{% endblock %}</title>
+    {% endblock %}
+</head>
+
+<body>
+<h1 class="inquiryList">Liste {% block title %}{% endblock %}</h1>
+
+{% block animation %}{% endblock %}
+
+{% for item in list %}
+    {% block myList %}
+    {% endblock %}
+{% endfor %}
+</body>
+</html>

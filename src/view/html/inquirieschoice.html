@@ -1,0 +1,49 @@
+{# inquirieschoice.html #}
+
+{% extends "templates/listchoice.twig" %}
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block head %}
+{{ parent() }}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+{% block title %}d'enquêtes{% endblock %}
+
+{% block animation %}{% if success is defined and success is not null %}
+<div class="{{ animationClass }}">Enquête réussie !</div>
+{% endif %}{% endblock %}
+
+{% block myList %}
+{% if role == 'visitor' and item.getIsUser() %}
+<div>
+    <div class="card user-only"
+         onkeydown="window.location.href='{{ base_path }}/visitor/register'"
+         onclick="window.location.href='{{ base_path }}/visitor/register'">
+        <p>{{ 'Connectez-vous pour accéder à cette enquête' }}</p>
+        <p>Titre : {{ item.getTitle() }}</p>
+    </div>
+</div>
+{% else %}
+<div>
+    {% if not success1 is empty %}
+    {% for r in success1 %}
+    <div class="{% if r.inquiry_id == item.getId() and r.is_finish == 1 and role != 'visitor' %}card card-completed
+                                        {% else %}card
+                                        {% endif %}"
+         onkeydown="window.location.href='{{ base_path }}/visitor/register'"
+         onclick="window.location.href='{{ base_path }}/{{ role }}/investigate/{{ item.getId() }}'">
+        <p>ID : {{ item.getId() }}</p>
+        <p>Titre : {{ item.getTitle() }}</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="card"
+         onkeydown="window.location.href='{{ base_path }}/{{ role }}/investigate/{{ item.getId() }}'"
+         onclick="window.location.href='{{ base_path }}/{{ role }}/investigate/{{ item.getId() }}'">
+        <p>ID : {{ item.getId() }}</p>
+        <p>Titre : {{ item.getTitle() }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

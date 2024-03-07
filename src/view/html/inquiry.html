@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/all.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/styleInquiry.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/styleNotepad.css">
+    <title>Enquête</title>
+</head>
+<body>
+<header class="header">
+    <div class="menu-bar">
+        <img alt="Logo SQLuedo" src="{{ base_path }}/view/Images/logo_SQLuedo.png" id="logo">
+        <h2 id="inquiry-title">{{ inquiry.getTitle() }}</h2>
+        {% if role == 'user' or role == 'admin' %}
+        <button id="accountButton" class="submit-button"
+                onclick="window.location.href='{{ base_path }}/{{ role }}/menu'">Compte
+        </button>
+        {%else%}
+        <button id="connection-button" class="submit-button" onclick="window.location.href='{{ base_path }}'">Se
+            connecter
+        </button>
+        {% endif %}
+    </div>
+    <div class="menu">
+        <div>
+            <button class="submit-button" id="openSolutions">
+                Solution
+            </button>
+            <button class="submit-button" id="openDiagram">
+                Diagramme de la base
+            </button>
+            <button class="submit-button" id="openNotepad">
+                Bloc-Notes
+            </button>
+            <button class="submit-button" id="hint-button">
+                Indices
+            </button>
+        </div>
+    </div>
+</header>
+<div class="flex-zone">
+    <div id="gauche">
+        <div class="card">
+            <div id="longText" class="collapsed">
+                <p>{{ inquiry.getDescription() }}</p>
+            </div>
+            <button id="toggleButton" onclick="toggleText()">Lire la suite...</button>
+        </div>
+        <div class="card" id="result">
+            {% if result is defined %}
+            <div id="table-container">
+                <table id="table">
+                    <caption></caption>
+                    <tr class="line" id="labels">
+                        {% for label in result[0] | keys %}
+                        <th class="column">{{ label }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for row in result %}
+                    <tr class="line">
+                        {% for column in row %}
+                        <td class="column">{{ column }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+            {% if error is defined %}
+            <p>{{ error }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div id="queryBlock" class="card">
+        <form class="formulaire-card" method="post" action="{{ base_path }}/user/request">
+            <textarea name="request" placeholder="Entrer une requête SQL" id="query-input">{{ request }}</textarea>
+            <label for="query-input"></label>
+            <input type="submit" name="validRequest" value="Exécuter la requête" class="submit-button">
+            <input type="button" id="cleanQuery" class="submit-button" value="Effacer la requête"/>
+        </form>
+    </div>
+</div>
+<!-- Ensemble des popups à la suite -->
+
+<div id="overlaySolution" class="overlay">
+    <div id="solutionPopUp" class="card">
+        <form method="post" action="{{ base_path }}/{{ role }}/check/{{ inquiry.getId() }}" class="formulaire-card">
+            <input type="text" name="murder_first_name" id="murdererName" placeholder="Prénom du meurtrier">
+            <label for="murdererName"></label>
+            <input type="text" name="murder_name" id="murdererSurname" placeholder="Nom du meurtrier">
+            <label for="murdererSurname"></label>
+            <input type="text" name="place" id="place" placeholder="Lieu">
+            <label for="place"></label>
+            <input type="text" name="object" id="object" placeholder="Objet">
+            <label for="object"></label>
+            <button type="submit" name="submit" class="submit-button">Valider</button>
+        </form>
+        <button name="closeSolution" class="submit-button" id="closeSolutions">Annuler</button>
+    </div>
+</div>
+<div id="overlayNotepad" class="overlay">
+    <div id="notepadPopUp" class="card">
+        <form action="{{ base_path }}/user/investigate/{{ inquiry.getId() }}">
+            {% if userId is defined %}
+            <input type="hidden" id="inquiryId" value="{{ inquiry.getId() }}">
+            <input type="hidden" id="userId" value="{{ userId }}">
+            {% else %}
+            <input type="hidden" id="inquiryId" value="{{ inquiry.getId() }}">
+            {% endif %}
+            <textarea id="notepadInput" name="Notepad" cols="150" rows="15">{{ notePad }}</textarea>
+            <label for="notepadInput"></label>
+            <button name="fermer-notes" class="submit-button" id="closeNotepad">Fermer</button>
+        </form>
+    </div>
+</div>
+<div id="diagram" class="overlay">
+    <div id="diagramPopUp" class="card">
+        <img class="diagram-img" alt="Diagramme de la base inquiry.getTitle()"
+             src="{{ base_path }}/view/Images/diagrammes/{{ inquiry.getTitle() }}.png">
+        <button name="closeDiagramme" class="submit-button" id="closeDiagram">Fermer</button>
+    </div>
+</div>
+<script>
+    var basePath = "{{ base_path }}";
+</script>
+<script type="text/javascript" src="{{ base_path }}/view/js/ajax.js"></script>
+<script src="{{ base_path }}/view/js/loadNotepad.js"></script>
+<script src="{{ base_path }}/view/js/popUp.js"></script>
+</body>
+</html>

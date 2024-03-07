@@ -1,0 +1,96 @@
+body {
+    padding-top: 20px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    color: white;
+}
+
+.normal-page {
+    background-color: rgb(151, 151, 151);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.current-page {
+    background-color: rgb(40, 40, 40);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+    background-color: rgb(200, 200, 200);
+    transform: scale(105%);
+}
+
+#result {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+
+#user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 15%;
+}
+
+.button-class {
+    width: 2vw;
+    height: 2vw;
+    overflow: hidden;
+}
+
+.button-class img {
+    display: block;
+    height: auto;
+    width: 100%;
+}
+
+
+#selectDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#selectNbUsers {
+    color: rgb(200, 200, 200);
+}
+
+.card {
+    font: 1.25vw/1.618 "Young-Serif1", sans-serif;
+    color: rgb(200, 200, 200);
+}
+
+.switchTableList {
+    font: 1.25vw/1.618 "Young-Serif1", sans-serif;
+    border: 2px solid rgb(192, 192, 192);
+    border-radius: 1vw; /* Responsive border radius */
+    background-color: rgba(118, 118, 118, 0.53);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(0.315vw);
+    padding: 10px;
+    margin: 0 auto;
+    color: rgb(200, 200, 200);
+    max-width: 22.5vw;
+    text-align: center;
+}

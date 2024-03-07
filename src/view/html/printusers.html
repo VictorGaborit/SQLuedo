@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/styleMenu.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/styleHome.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/styleUserList.css">
+    <title>Les utilisateurs</title>
+</head>
+<body>
+<div id="selectDiv">
+    <label class="card" for="selectNbUsers">Nombre d'utilisateurs par page</label>
+    <select id="selectNbUsers" name="selectNbUsers" class="card">
+        <option id="10" value="10">10</option>
+        <option id="15" value="15">15</option>
+        <option id="20" value="20">20</option>
+        <option id="25" value="25">25</option>
+    </select>
+    <script>
+        document.getElementById("selectNbUsers").value = "{{ nbUsersDefault }}";
+        document.addEventListener("DOMContentLoaded", function () {
+            let selectElement = document.getElementById("selectNbUsers");
+            selectElement.addEventListener("change", function () {
+                let selectedValue = selectElement.value;
+                window.location.href = '{{ base_path }}/admin/printUsers/{{ pageNumber }}/' + selectedValue;
+            });
+        });
+    </script>
+</div>
+<div>
+    <div>
+        <div class="block">
+            {% if users %}
+            <div id="result">
+                {% for user in users %}
+                <div class="card" id="user">
+                    <p>{{ user }}</p>
+                    <form method="post" action="{{ base_path }}/admin/deleteUser/{{ pageNumber }}/{{ nbUsersDefault }}"
+                          onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">
+                        <input type="hidden" name="toDelete" value="{{ user }}">
+                        <button type="submit" class="button-class">
+                            <img src="{{ base_path }}/view/Images/delete.svg" alt="delete button">
+                        </button>
+                    </form>
+                    <form method="post" action="{{ base_path }}/admin/promoteUser/{{ pageNumber }}/{{ nbUsersDefault }}"
+                          onsubmit="return confirm('Cet utilisateur s\'apprête à devenir votre égal, êtes-vous sûr de votre choix ?')">
+                        <input type="hidden" name="toPromote" value="{{ user }}">
+                        <button type="submit" class="button-class">
+                            <img src="{{ base_path }}/view/Images/admin.svg" alt="admin button">
+                        </button>
+                    </form>
+                    <form method="post" action="{{ base_path }}/admin/banUser/{{ pageNumber }}/{{ nbUsersDefault }}"
+                          onsubmit="return confirm('Cet utilisateur s\'apprête à être banni pendant deux ans, êtes-vous sûr de votre choix ?')">
+                        <input type="hidden" name="toBan" value="{{ user }}">
+                        <button type="submit" class="button-class">
+                            <img src="{{ base_path }}/view/Images/ban.svg" alt="ban button">
+                        </button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div>
+                <p>Il n'y a aucun utilisateur autre que des administrateurs</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <form class="pagination">
+            <button
+                    type="button"
+                    class="{% if isCurrentPage %}current-page{% elseif isPositivePage %}normal-page{% endif %}"
+                    onclick="window.location.href='{{ base_path }}/admin/printUsers/{{ 1 }}/{{ nbUsersDefault }}'">
+                <img alt="Première page" src="{{ base_path }}/view/Images/double_chevron_left.svg">
+            </button>
+            <button
+                    type="button"
+                    class="{% if isCurrentPage %}current-page{% elseif isPositivePage %}normal-page{% endif %}"
+                    onclick="window.location.href='{{ base_path }}/admin/printUsers/{{ pageNumber - 1 }}/{{ nbUsersDefault }}'">
+                <img alt="Page précédente" src="{{ base_path }}/view/Images/chevron_left.svg">
+            </button>
+            {% if nbPages - pageNumber == 0 %}
+            {% set decalageMax = 0 %}
+            {% elseif nbPages - pageNumber == 1 %}
+            {% set decalageMax = 1 %}
+            {% else %}
+            {% set decalageMax = 2 %}
+            {% endif %}
+            {% if nbPages - pageNumber == nbPages - 1 %}
+            {% set decalageMin = 0 %}
+            {% elseif nbPages - pageNumber == nbPages - 2 %}
+            {% set decalageMin = 1 %}
+            {% else %}
+            {% set decalageMin = 2 %}
+            {% endif %}
+            {% for page in (pageNumber - decalageMin)..(pageNumber + decalageMax) %}
+            {% set isCurrentPage = (page == pageNumber) %}
+            {% set isPositivePage = (page > 0) %}
+            {% set isNotMax = (page <= nbPages) %}
+            {% if isPositivePage or isNotMax %}
+            <button
+                    type="button"
+                    class="{% if isCurrentPage %}current-page{% elseif isPositivePage %}normal-page{% endif %}"
+                    onclick="window.location.href='{{ base_path }}/admin/printUsers/{{ page }}/{{ nbUsersDefault }}'">
+                {{ page }}
+            </button>
+            {% endif %}
+            {% endfor %}
+            <button
+                    type="button"
+                    class="{% if isCurrentPage %}current-page{% elseif isPositivePage %}normal-page{% endif %}"
+                    onclick="window.location.href='{{ base_path }}/admin/printUsers/{{ pageNumber + 1 }}/{{ nbUsersDefault }}'">
+                <img alt="Page suivante" src="{{ base_path }}/view/Images/chevron_right.svg">
+            </button>
+            <button
+                    type="button"
+                    class="{% if isCurrentPage %}current-page{% elseif isPositivePage %}normal-page{% endif %}"
+                    onclick="window.location.href='{{ base_path }}/admin/printUsers/{{ nbPages }}/{{ nbUsersDefault }}'">
+                <img alt="Dernière page" src="{{ base_path }}/view/Images/double_chevron_right.svg">
+            </button>
+        </form>
+        <div id="flex-zone">
+            <button class="btn-card" onclick="window.location.href='{{ base_path }}/admin/printUsersBan/0/10'">Afficher
+                les utilisateurs bannis
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

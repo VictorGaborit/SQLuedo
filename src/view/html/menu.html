@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/styleHome.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/styleMenu.css"/>
+    <title>Menu</title>
+</head>
+<body class="bod-center">
+<div>
+    <img src="{{ base_path }}/view/Images/logo_SQLuedo.png" alt="Logo SQLuedo" height="200" width="325">
+</div>
+<div id="flex-zone">
+    <div class="card">
+        <div class="block">
+            <div>
+                <img src="{{ base_path }}/view/Images/icone-utilisateur.svg"
+                     alt="Icone utilisateur"
+                     height="150"
+                     width="150">
+            </div>
+        </div>
+        <div>
+            <p>Bienvenue, {{ username }}</p>
+        </div>
+        <div class="block">
+        </div>
+        <div class="block">
+            <div>
+                <button type="button" id="profil-button" class="btn-card"
+                        onclick="window.location.href='{{ base_path }}/user/profil'">Mon profil
+                </button>
+            </div>
+        </div>
+        <div class="block">
+            <div>
+                <button type="button" id="disconnect-button" class="btn-card"
+                        onclick="window.location.href='{{ base_path }}/user/logout'">Se déconnecter
+                </button>
+            </div>
+        </div>
+        <div class="block">
+            <div>
+                <button type="button" id="lesson-button" class="btn-card"
+                        onclick="window.location.href='{{ base_path }}/user/studyLesson'">Consulter les leçons
+                </button>
+            </div>
+        </div>
+        {% if isAdmin == true %}
+        <div class="block">
+            <div>
+                <button type="button" id="print-users" class="btn-card"
+                        onclick="window.location.href='{{ base_path }}/admin/printUsers/0/10'">Afficher les utilisateurs
+                </button>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="block">
+        <div class="card">
+            <button type="button" id="play-button" class="btn-card"
+                    onclick="window.location.href='{{ base_path }}/user/play'">Jouer !
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

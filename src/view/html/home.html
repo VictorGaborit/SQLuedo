@@ -1,0 +1,50 @@
+<!-- Copyright 2023 Initia -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Accueil</title>
+    <link rel="stylesheet" type="text/css" href="{{ base_url }}{{ base_path }}/view/css/all.css">
+    <link rel="stylesheet" type="text/css" href="{{ base_url }}{{ base_path }}/view/css/styleHome.css"/>
+</head>
+<body class="bod-center">
+<div>
+    <a href="{{ base_url }}/init"><img src="{{ base_url }}{{ base_path }}/view/Images/logo_SQLuedo.png"
+                                       alt="Logo SQLuedo" class="logo" width="400" height="200"></a>
+</div>
+<div class="block">
+    <div class="card">
+        <img src="{{ base_url }}{{ base_path }}/view/Images/icone-utilisateur.svg" alt="Image utilisateur" height="150"
+             width="150">
+        {% if error is defined %}
+        {% set error_message = error | base64_decode | url_decode %}
+        <div class="message-erreur">{{ error_message }}</div>
+        {% endif %}
+        <form method="post" action="{{ base_path }}/visitor/login" class="formulaire-card" id="loginForm">
+            <input type="text" id="username" name="username" placeholder="Pseudonyme">
+            <label for="username"></label>
+            <input type="password" id="password" name="password" placeholder="Mot de Passe">
+            <label for="password"></label>
+            <input type="submit" name="login" value="Se connecter" class="submit-button">
+            <a href="{{ base_url }}{{ base_path }}/visitor/recoverpw">Mot de passe oublié</a>
+        </form>
+    </div>
+    <div class="card">
+        <img src="{{ base_url }}{{ base_path }}/view/Images/icone-utilisateur.svg" alt="Image utilisateur" height="150"
+             width="150">
+        <form method="post" action="{{ base_url }}{{ base_path }}/visitor/play">
+            <input type="submit" class="submit-button" name="visitor" value="Se connecter en tant qu'invité">
+        </form>
+        <p>Attention, aucune progression<br>ne sera sauvegardée !</p>
+    </div>
+</div>
+<div>
+    <div class="card">
+        <p>Vous n'avez pas encore créé de compte ?</p>
+        <form action="{{ base_url }}{{ base_path }}/visitor/register" method="post" class="formulaire-card">
+            <input class="submit-button" type="submit" name="registration" value="Inscription">
+        </form>
+    </div>
+</div>
+</body>
+</html>

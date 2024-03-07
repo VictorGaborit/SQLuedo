@@ -1,0 +1,131 @@
+@font-face {
+    font-family: "Young-Serif1";
+    src: url('../fonts/YoungSerif-Regular.ttf');
+}
+
+body {
+    min-width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Young Serif1", serif;
+    background: url("../Images/background.png") fixed center/cover;
+    backdrop-filter: blur(3px);
+    color: rgb(161, 161, 161);
+}
+
+.bod-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 19vw;
+}
+
+.card {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgb(192, 192, 192);
+    border-radius: 1vw; /* Responsive border radius */
+    background-color: rgba(118, 118, 118, 0.53);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(0.315vw);
+    padding: 10px;
+    margin: 0 2.5vw 2.5vw 2.5vw;
+}
+
+.card.user-only {
+    background-color: #2a0b11;
+}
+
+.card * {
+    font: 1.25vw/1.618 "Young-Serif1", sans-serif;
+}
+
+.formulaire-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulaire-card input {
+    width: 95%;
+    margin: 5px;
+    background-color: rgb(50, 50, 50);
+    padding: 5px;
+    border-radius: 8px;
+    color: white;
+}
+
+.message-erreur {
+    color: #d3060a;
+    font-weight: bold;
+}
+
+.submit-button {
+    background-color: rgb(151, 151, 151);
+    padding: 10px;
+}
+
+.submit-button:hover {
+    background-color: rgb(200, 200, 200);
+    transform: scale(105%);
+    transition-duration: 500ms;
+}
+
+.title {
+    text-align: center;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgb(192, 192, 192);
+    border-radius: 1vw; /* Responsive border radius */
+    background-color: rgba(118, 118, 118, 0.53);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(0.315vw);
+    padding: 10px;
+    margin: 0 2.5vw 2.5vw 2.5vw;
+}
+
+
+.success {
+    animation: successAnimation 2s ease-in-out;
+    color: green;
+}
+
+
+@keyframes successAnimation {
+    0% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+#longText.collapsed {
+    max-height: 90px;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.card.card-completed {
+    background-color: rgba(27, 179, 34, 0.7);
+}
+
+.card-completed:hover {
+    transform: scale(105%);
+    transition-duration: 500ms;
+}

@@ -1,0 +1,20 @@
+{# lessonschoice.html #}
+
+{% extends "templates/listchoice.twig" %}
+
+{% block pageTitle %}{{ title }}{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+{% block title %}des leçons{% endblock %}
+
+{% block myList %}
+<div>
+    <div class="card"
+         onkeydown="window.location.href='{{ base_path }}/user/{{ item.getId() }}/readLesson'"
+         onclick="window.location.href='{{ base_path }}/user/{{ item.getId() }}/readLesson'">
+        <p>Titre : {{ item.getTitle() }}</p>
+    </div>
+</div>
+{% endblock %}

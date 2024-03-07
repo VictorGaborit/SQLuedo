@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>Réinitialisation du mot de passe</title>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/styleHome.css"/>
+</head>
+<body class="bod-center">
+<div>
+    <img src="{{ base_path }}/view/Images/logo_SQLuedo.png" alt="Logo SQLuedo" class="logo">
+</div>
+<div class="block">
+    <div class="card">
+        <img src="{{ base_path }}/view/Images/icone-utilisateur.svg" height="150" width="200"
+             alt="Photo de profil utilisateur">
+        <p>Veuillez entrer votre adresse <br> e-mail pour réinitialiser <br>votre mot de passe</p>
+        <form method="post" action="{{ base_path }}/visitor/sendmail" class="formulaire-card">
+            <input type="email" id="email" name="email" placeholder="Adresse mail">
+            <label for="email"></label>
+            <input type="submit" name="submit" value="Envoyer" class="submit-button">
+        </form>
+    </div>
+</div>
+</body>
+</html>

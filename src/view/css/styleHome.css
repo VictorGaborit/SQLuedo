@@ -1,0 +1,35 @@
+.block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card:hover {
+    transform: scale(105%);
+    transition-duration: 500ms;
+}
+
+.card p {
+    color: rgb(200, 200, 200);
+    text-align: center;
+}
+
+.btn-card {
+    font: 1.25vw/1.618 "Young-Serif1", sans-serif;
+    background-color: rgb(151, 151, 151);
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.btn-card:hover {
+    background-color: rgb(200, 200, 200);
+    transform: scale(105%);
+    transition-duration: 500ms;
+}
+
+#check {
+    width: 1.2vw;
+    height: 1.2vw;
+}

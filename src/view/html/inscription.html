@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+    <link rel="stylesheet" type="text/css" href="{{ base_path }}/view/css/all.css"/>
+    <script src="{{ base_path }}//view/js/goBack.js"></script>
+
+</head>
+<body class="bod-center">
+<div>
+    <img src="{{ base_path }}/view/Images/logo_SQLuedo.png" class="logo" alt="Logo SQLUEDO">
+</div>
+<div class="card">
+    <img src="{{ base_path }}/view/Images/icone-utilisateur.svg" class="image-card" alt="Account" height="150"
+         width="150">
+    <form method="post" action="{{ base_path }}/visitor/registration" class="formulaire-card" autocomplete="off">
+        {% if error is defined %}
+        {% set error_message = error | base64_decode | url_decode%}
+        <div class="message-erreur">{{ error_message }}</div>
+        {% endif %}
+        <input type="text" id="username" name="username" placeholder="Pseudonyme" required>
+        <label for="username"></label>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <label for="email"></label>
+        <input type="password" id="password" name="password" placeholder="Mot de Passe" required>
+        <label for="password"></label>
+        <input type="submit" name="submit" value="S'inscrire" class="submit-button">
+    </form>
+</div>
+<div class="block">
+    <div class="card">
+        <button type="button" id="disconnect-button" onclick="window.location.href='{{ base_path }}/'" formnovalidate>
+            Retour
+        </button>
+    </div>
+</div>
+
+
+</body>
+</html>

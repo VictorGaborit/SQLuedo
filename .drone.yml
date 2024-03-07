@@ -1,0 +1,36 @@
+kind: pipeline
+name: default
+
+variables:
+  PROJECT_VERSION: "1.0.0"
+
+trigger:
+  branch:
+    - testMerge
+    - master
+
+steps:
+  - name: build
+    image: composer:2
+    commands:
+      - cd src/
+      - composer install
+
+  - name: test
+    image: php:7.4-cli
+    commands:
+      - cd src/
+      - ./vendor/bin/phpunit
+
+  - name: code-analysis
+    image: sonarsource/sonar-scanner-cli:latest
+    environment:
+      SONAR_TOKEN:
+        from_secret: SONAR_TOKEN
+    commands:
+      - export SONAR_SCANNER_VERSION=4.7.0.2747
+      - export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux
+      - curl --create-dirs -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
+      - unzip -ol $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
+      - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
+      - sonar-scanner -Dsonar.projectKey=SQLuedo -Dsonar.projectVersion=$PROJECT_VERSION -Dsonar.sources=./src -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.php.coverage.reportPath=./src/coverage/coverage.info -Dsonar.exclusions=**/vendor/**,**/tests/**,**/router/**,**/coverage/**,**/report/**

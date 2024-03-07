@@ -1,0 +1,16 @@
+.block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 150px;
+}
+
+.card {
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.card:hover {
+    transform: scale(105%);
+    transition-duration: 500ms;
+}

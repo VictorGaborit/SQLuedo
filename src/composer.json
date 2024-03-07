@@ -1,0 +1,17 @@
+{
+    "require": {
+        "twig/twig": "^3.0",
+        "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Model\\": "model/",
+            "Controller\\": "controller/",
+            "Router\\": "router/",
+            "UnitTest\\": "tests/UnitTests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}

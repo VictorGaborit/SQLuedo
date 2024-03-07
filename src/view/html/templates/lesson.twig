@@ -1,0 +1,29 @@
+<!-- Copyright 2023 SonarSource SA -->
+{# lesson.twig #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ base_path }}/view/css/lesson.css"/>
+        <title>Leçon : {% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+<main>
+    {% block content %}
+        {% block paragraph_title %}{% endblock %}
+        {% block paragraph_content %}{% endblock %}
+        {% block info %}{% endblock %}
+        {% block query %}{% endblock %}
+        {% block comment %}{% endblock %}
+    {% endblock %}
+</main>
+<footer>
+    {% block footer %}
+        Crédits : Édité par {% block lastPublisher %}{% endblock %} le {% block lastEdit %}{% endblock %}
+    {% endblock %}
+</footer>
+</body>
+</html>

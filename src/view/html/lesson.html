@@ -1,0 +1,35 @@
+{# lesson.html #}
+
+{% extends "templates/lesson.twig" %}
+
+{% block title %}{{ lesson.getTitle() }}{% endblock %}
+
+{% block content %}
+{% for paragraph in lesson.getContent() %}
+<div>
+    {% if paragraph.getContentTitle() is defined %}
+    <h2 id="sub-title">{{ paragraph.getContentTitle() }}</h2>
+    {% endif %}
+
+    {% if paragraph.getContentContent() is defined %}
+    <div id="lesson">{{ paragraph.getContentContent() }}</div>
+    {% endif %}
+
+    {% if paragraph.getInfo() is defined %}
+    <div id="info">{{ paragraph.getInfo() }}</div>
+    {% endif %}
+
+    {% if paragraph.getQuery() is defined %}
+    <div id="query">{{ paragraph.getQuery() }}</div>
+    {% endif %}
+
+    {% if paragraph.getComment() is defined %}
+    <div id="result">{{ paragraph.getComment() }}</div>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block lastPublisher %}{{ lesson.getLastPublisher() }}{% endblock %}
+
+{% block lastEdit %}{{ lesson.getLastEdit() }}{% endblock %}
